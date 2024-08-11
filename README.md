@@ -39,7 +39,6 @@ Fall Detected System Using YOLOv8
 - You can see the demo with this video: [Click here](https://github.com/IsraaSaede/Fall-Detected/blob/main/Demo.mp4)
 - Watch the video on YouTube: [Check it out here!](https://youtu.be/OoUuNuZD43w)
 <br>
-<img src="https://github.com/IsraaSaede/Fall-Detected/blob/main/Demo.mp4" width="280" height="550">
 
 ## License
 This project is licensed under the MIT License.
