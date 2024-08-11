@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Live Video Feed with Fall Detection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        .video-container {
+            width: 80%;
+            max-width: 800px;
+            border: 2px solid #ddd;
+            padding: 10px;
+            background-color: #fff;
+        }
+        .video-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+    </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var socket = io();
+
+        // Create a new Audio object, ensure the path is correct
+        var audio = new Audio('/static/alert.mp3');
+
+        // Handle errors related to audio playback
+        audio.onerror = function() {
+            console.error('Error loading the audio file. Please check the path: /static/alert.mp3');
+        };
+
+        // Ensure the audio is loaded before attempting to play it
+        audio.oncanplaythrough = function() {
+            console.log('Audio loaded and ready to play.');
+        };
+
+        socket.on('fall_detected', function() {
+            // Attempt to play the audio, with a fallback in case of an error
+            audio.play().catch(function(error) {
+                console.error('Failed to play the audio:', error);
+            });
+        });
+    });
+</script>
+
+</head>
+<body>
+    <h1>Live Video Feed with Fall Detection</h1>
+    <div class="video-container">
+        <img src="{{ url_for('video_feed') }}">
+    </div>
+</body>
+</html>
